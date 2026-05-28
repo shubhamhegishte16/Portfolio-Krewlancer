@@ -12,24 +12,34 @@ app.get("/", (req, res) => {
 });
 
 app.post("/contact", (req, res) => {
+  try {
 
-const newMessage = req.body;
+    const newMessage = req.body;
 
-const messages = JSON.parse(
-fs.readFileSync("messages.json")
-);
+    const messages = JSON.parse(
+      fs.readFileSync("./messages.json", "utf-8")
+    );
 
-messages.push(newMessage);
+    messages.push(newMessage);
 
-fs.writeFileSync(
-"messages.json",
-JSON.stringify(messages, null, 2)
-);
+    fs.writeFileSync(
+      "./messages.json",
+      JSON.stringify(messages, null, 2)
+    );
 
-res.send("Message saved successfully");
+    res.status(200).send("Message saved successfully");
 
+  } catch (error) {
+
+    console.log(error);
+
+    res.status(500).send("Error saving message");
+
+  }
 });
 
-app.listen(5000, () => {
-  console.log("Server started on port 5000");
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
