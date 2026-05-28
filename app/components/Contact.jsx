@@ -20,7 +20,7 @@ setFormData({
 const handleSubmit=async(e)=>{
 e.preventDefault();
 
-const response = await fetch("https://portfolio-krewlancer.onrender.com/contact",{
+const response = await fetch("http://localhost:5000/contact",{
 
 method:"POST",
 
