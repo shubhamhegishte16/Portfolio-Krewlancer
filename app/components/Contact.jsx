@@ -32,9 +32,9 @@ body:JSON.stringify(formData)
 
 });
 
-const data = await response.text();
+const data = await response.json();
 
-alert(data);
+alert("successfully sent message");
 
 };
 
